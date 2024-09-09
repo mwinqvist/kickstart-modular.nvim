@@ -211,6 +211,7 @@ return {
         'stylua', -- Used to format Lua code
         'black',
         'isort',
+        'markdownlint',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
