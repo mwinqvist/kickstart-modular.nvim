@@ -1,9 +1,9 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- Clear highlights on search when pressing <Esc> in normal mode
+-- Clear highlights on search when pressing 'q' in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', 'q', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -31,6 +31,16 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- Use 'kj' instead of Escape key
+vim.keymap.set({ 'v', 'i' }, 'kj', '<Esc>')
+vim.keymap.set('c', 'kj', '<C-c>')
+
+-- Use Tab and S-Tab to indent/outdent
+local opts = { noremap = true, silent = true }
+vim.keymap.set('n', '<Tab>', '>>', opts)
+vim.keymap.set('n', '<S-Tab>', '<<', opts)
+vim.keymap.set('v', '<Tab>', '>gv', opts)
+vim.keymap.set('v', '<S-Tab>', '<gv', opts)
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
