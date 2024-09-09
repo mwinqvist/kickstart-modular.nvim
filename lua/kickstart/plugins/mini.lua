@@ -58,6 +58,17 @@ return {
         return '%2l:%-2v'
       end
 
+      -- Move visual selection or current line with <Alt> + hjkl
+      require('mini.move').setup()
+
+      -- Trim all trailing whitespace with MiniTrailspace.trim().
+      -- Trim all trailing empty lines with MiniTrailspace.trim_last_lines().
+      require('mini.trailspace').setup()
+
+      -- - gc   - Toggle Comment
+      -- - gcc  - Toggle comment on current line
+      require('mini.comment').setup()
+
       require('mini.files').setup {
         windows = {
           preview = true,

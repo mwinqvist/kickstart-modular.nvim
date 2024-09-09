@@ -55,4 +55,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = { '*.py', '*.js', '*.lua', '*.c', '*.cpp', '*.java', '*.md', '*.rs' },
+  callback = function()
+    MiniTrailspace.trim()
+  end,
+})
 -- vim: ts=2 sts=2 sw=2 et
