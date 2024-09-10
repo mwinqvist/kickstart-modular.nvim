@@ -8,6 +8,10 @@ return {
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
       }
+      lint.linters.markdownlint.args = {
+        '--ignore',
+        '/home/martin/.local/share/nvim/gp/chats/',
+      }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
       -- instead set linters_by_ft like this:
