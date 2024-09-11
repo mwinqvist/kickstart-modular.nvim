@@ -68,6 +68,7 @@ return {
 
         -- Chat GPT groups
         { '<C-g>c', group = 'New Chat', mode = { 'n', 'v' } },
+        { '<C-g>t', group = 'Toggle Chat', mode = { 'n', 'v' } },
         { '<C-g>r', group = 'Rewrite', mode = { 'n', 'v' } },
         { '<C-g>u', group = 'Write Unit Tests', mode = { 'v' } },
         { '<C-g>d', group = 'Write Docstring', mode = { 'v' } },
