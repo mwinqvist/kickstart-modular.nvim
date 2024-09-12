@@ -42,12 +42,16 @@ return {
 
           local test_framework = filetype_to_framework[vim.bo.filetype] or 'an appropriate test framework'
 
-          local template = 'I have the following code from {{filename}}:\n\n'
-            .. '```{{filetype}}\n{{selection}}\n```\n\n'
-            .. 'Write unit tests for the code above using '
-            .. test_framework
-            .. 'Respond exclusively with code.'
-            .. 'If you need to explain something, add code comments.'
+          local template = [[I have the following code from {{filename}}:
+
+          ```{{filetype}}
+          {{selection}}
+          ```
+
+          Write unit tests for the code above.
+          Respond exclusively with code.
+          If you need to explain something, add code comments.
+          Use ]] .. test_framework
 
           local agent = gp.get_command_agent()
           gp.Prompt(params, target, agent, template)
@@ -56,20 +60,48 @@ return {
         -- Writes docstring for the selection
         DocString = function(gp, params)
           local target = gp.Target[targets[params.args]] or gp.Target.enew
-          local response = 'the docstring'
+          local response = 'the added docstring, nothing else'
 
           if target == gp.Target.rewrite then
             response = 'the original code and the added docstring'
           end
 
-          local template = 'I have the following code from {{filename}}:\n\n'
-            .. '```{{filetype}}\n{{selection}}\n```\n\n'
-            .. 'Write a docstring for the code above.'
-            .. 'Write it in a concise style.'
-            .. 'Try to keep line length to 80 columns.'
-            .. 'Do not change the original code nor comments.'
-            .. 'Respond exclusively with'
-            .. response
+          local template = [[I have the following code from {{filename}}:
+
+          ```{{filetype}}
+          {{selection}}
+          ```
+
+          Write a docstring for the code above.
+          Write it in a concise style.
+          Try to keep line length to 80 columns.
+          Do not change the original code nor comments.
+          Respond exclusively with ]] .. response
+
+          local agent = gp.get_command_agent()
+          gp.Prompt(params, target, agent, template)
+        end,
+
+        -- Performs a code review for the selection
+        CodeReview = function(gp, params)
+          local target = gp.Target[targets[params.args]] or gp.Target.enew
+
+          local template = [[
+            I have the following code from {{filename}}:
+
+            ```{{filetype}}
+            {{selection}}
+            ```
+
+            Please review the code above. Consider the following:
+            Potential bugs.
+            Code readability and maintainability.
+            Performance.
+            Security concerns.
+            Best practices for the used programming language.
+            Keep the response concise and to the point.
+          ]]
+
           local agent = gp.get_command_agent()
           gp.Prompt(params, target, agent, template)
         end,
@@ -160,6 +192,10 @@ return {
     vim.keymap.set('v', '<C-g>ds', ":<C-u>'<,'>GpDocString split<cr>", options 'Write Docstring in Horizonal Split')
     vim.keymap.set('v', '<C-g>dv', ":<C-u>'<,'>GpDocString vsplit<cr>", options 'Write Docstring in Vertical Split')
     vim.keymap.set('v', '<C-g>dt', ":<C-u>'<,'>GpDocString tabnew<cr>", options 'Write Docstring in Tab')
+
+    vim.keymap.set('v', '<C-g>wt', ":<C-u>'<,'>GpCodeReview tabnew<cr>", options 'Perform Code Review in Tab')
+    vim.keymap.set('v', '<C-g>ws', ":<C-u>'<,'>GpCodeReview split<cr>", options 'Perform Code Review in Horizontal Split')
+    vim.keymap.set('v', '<C-g>wv', ":<C-u>'<,'>GpCodeReview vsplit<cr>", options 'Perform Code Review in Vertical Split')
 
     vim.keymap.set('n', '<C-g>x', '<cmd>GpContext<cr>', options 'Toggle Context')
     vim.keymap.set('v', '<C-g>x', ":<C-u>'<,'>GpContext<cr>", options 'Toggle Context')
