@@ -212,6 +212,7 @@ return {
         'black',
         'isort',
         'markdownlint',
+        'rustfmt',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
