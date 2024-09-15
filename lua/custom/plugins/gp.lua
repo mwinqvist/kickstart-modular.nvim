@@ -107,25 +107,18 @@ return {
         end,
 
         -- Toggles the chat and displays it in the given target.
-        -- Calling this function without a target toggles the
-        -- chat using the previous target.
+        -- If the chat is alredy toggled it will be diplayed in
+        -- new target instead. Calling this function without a
+        -- target toggles the chat using the previous target.
         CustomChatToggle = function(gp, params)
           local new_target = #params.args > 0 and params.args ~= gp.config.toggle_target
 
           if new_target then
             gp.config.toggle_target = params.args
+            gp._toggle_close(gp._toggle_kind.chat)
           end
 
-          if TOGGLE_STATE and new_target then
-            -- If the chat is showing and we pass a new target,
-            -- call ChatToggle twice to first close the chat and
-            -- then show it in the new target.
-            vim.api.nvim_command(gp.config.cmd_prefix .. 'ChatToggle')
-            vim.api.nvim_command(gp.config.cmd_prefix .. 'ChatToggle')
-            return
-          end
           vim.api.nvim_command(gp.config.cmd_prefix .. 'ChatToggle')
-          TOGGLE_STATE = not TOGGLE_STATE
         end,
       },
     }
@@ -151,7 +144,7 @@ return {
 
     vim.keymap.set('n', '<C-g>tc', '<cmd>GpCustomChatToggle<cr>', options 'Toggle Chat')
     vim.keymap.set('n', '<C-g>tt', '<cmd>GpCustomChatToggle tabnew<cr>', options 'Toggle Chat in Tab')
-    vim.keymap.set('n', '<C-g>tv', '<cmd>GpCustomChatToggle split<cr>', options 'Toggle Chat in Horizontal Split')
+    vim.keymap.set('n', '<C-g>ts', '<cmd>GpCustomChatToggle split<cr>', options 'Toggle Chat in Horizontal Split')
     vim.keymap.set('n', '<C-g>tv', '<cmd>GpCustomChatToggle vsplit<cr>', options 'Toggle Chat in Vertical Split')
 
     vim.keymap.set('v', '<C-g>cc', ":<C-u>'<,'>GpChatNew<cr>", options 'New Chat in Current Window')
