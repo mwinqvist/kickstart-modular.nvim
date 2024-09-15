@@ -3,14 +3,14 @@ return {
     'echasnovski/mini.nvim',
     keys = {
       {
-        '<leader>mf',
+        '<leader>m',
         function()
           require('mini.files').open(vim.api.nvim_buf_get_name(0), true)
         end,
         desc = 'Open mini.files (current dir)',
       },
       {
-        '<leader>mF',
+        '<leader>M',
         function()
           require('mini.files').open(vim.uv.cwd(), true)
         end,
