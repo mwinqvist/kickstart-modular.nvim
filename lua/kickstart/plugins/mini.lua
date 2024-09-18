@@ -65,6 +65,9 @@ return {
       -- Trim all trailing empty lines with MiniTrailspace.trim_last_lines().
       require('mini.trailspace').setup()
 
+      -- Split and join arguments
+      require('mini.splitjoin').setup()
+
       -- - gc   - Toggle Comment
       -- - gcc  - Toggle comment on current line
       require('mini.comment').setup()
