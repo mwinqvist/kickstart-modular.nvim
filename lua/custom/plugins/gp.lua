@@ -82,30 +82,6 @@ return {
           gp.Prompt(params, target, agent, template)
         end,
 
-        -- Performs a code review for the selection
-        CodeReview = function(gp, params)
-          local target = gp.Target[targets[params.args]] or gp.Target.enew
-
-          local template = [[
-            I have the following code from {{filename}}:
-
-            ```{{filetype}}
-            {{selection}}
-            ```
-
-            Please review the code above. Consider the following:
-            Potential bugs.
-            Code readability and maintainability.
-            Performance.
-            Security concerns.
-            Best practices for the used programming language.
-            Keep the response concise and to the point.
-          ]]
-
-          local agent = gp.get_command_agent()
-          gp.Prompt(params, target, agent, template)
-        end,
-
         -- Toggles the chat and displays it in the given target.
         -- If the chat is alredy toggled it will be diplayed in
         -- new target instead. Calling this function without a
@@ -185,10 +161,6 @@ return {
     vim.keymap.set('v', '<C-g>ds', ":<C-u>'<,'>GpDocString split<cr>", options 'Write Docstring in Horizonal Split')
     vim.keymap.set('v', '<C-g>dv', ":<C-u>'<,'>GpDocString vsplit<cr>", options 'Write Docstring in Vertical Split')
     vim.keymap.set('v', '<C-g>dt', ":<C-u>'<,'>GpDocString tabnew<cr>", options 'Write Docstring in Tab')
-
-    vim.keymap.set('v', '<C-g>wt', ":<C-u>'<,'>GpCodeReview tabnew<cr>", options 'Perform Code Review in Tab')
-    vim.keymap.set('v', '<C-g>ws', ":<C-u>'<,'>GpCodeReview split<cr>", options 'Perform Code Review in Horizontal Split')
-    vim.keymap.set('v', '<C-g>wv', ":<C-u>'<,'>GpCodeReview vsplit<cr>", options 'Perform Code Review in Vertical Split')
 
     vim.keymap.set('n', '<C-g>x', '<cmd>GpContext<cr>', options 'Toggle Context')
     vim.keymap.set('v', '<C-g>x', ":<C-u>'<,'>GpContext<cr>", options 'Toggle Context')
