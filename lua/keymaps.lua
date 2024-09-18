@@ -16,11 +16,11 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- Disable arrow keys in normal mode
+vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -36,11 +36,29 @@ vim.keymap.set({ 'v', 'i' }, 'kj', '<Esc>')
 vim.keymap.set('c', 'kj', '<C-c>')
 
 -- Use Tab and S-Tab to indent/outdent
+-- Remapping Tab also remaps 'i'...
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<Tab>', '>>', opts)
 vim.keymap.set('n', '<S-Tab>', '<<', opts)
 vim.keymap.set('v', '<Tab>', '>gv', opts)
 vim.keymap.set('v', '<S-Tab>', '<gv', opts)
+
+-- Use <C-p> and <C-n> to jump to previous/next location
+vim.keymap.set('n', '<C-p>', '<C-o>', opts)
+vim.keymap.set('n', '<C-n>', '<C-i>', opts)
+
+-- Use 'H', 'L' to move to start/end of line
+vim.keymap.set({ 'n', 'v' }, 'H', '^', opts)
+vim.keymap.set({ 'n', 'v' }, 'L', '$', opts)
+
+-- Use 'J','K' to move down/up
+vim.keymap.set('n', 'J', '<C-d>', opts)
+vim.keymap.set('n', 'K', '<C-u>', opts)
+
+-- Use 'ä' to create marks
+-- 'm' is used for cut in cutlass.nvim
+vim.keymap.set('n', 'ä', 'm', opts)
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 

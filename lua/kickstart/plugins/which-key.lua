@@ -71,7 +71,9 @@ return {
         { '<C-g>r', group = 'Rewrite', mode = { 'n', 'v' } },
         { '<C-g>u', group = 'Write Unit Tests', mode = { 'v' } },
         { '<C-g>d', group = 'Write Docstring', mode = { 'v' } },
-        { '<C-g>d', group = 'Perform Code Review', mode = { 'v' } },
+
+        -- <g> groups
+        { 'gs', group = 'Mini Surround', mode = { 'n', 'v' } },
       },
     },
   },
