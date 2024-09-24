@@ -1,4 +1,3 @@
--- gp.nvim
 -- https://github.com/Robitx/gp.nvim
 
 return {
@@ -14,10 +13,15 @@ return {
       tabnew = 'tabnew',
     }
 
+    local custom_prompt = [[
+    Keep the answer short and concise.
+    ]]
+
     local conf = {
       chat_confirm_delete = false,
       toggle_target = 'tabnew',
       chat_template = require('gp.defaults').short_chat_template,
+
       whisper = {
         disable = true,
       },
@@ -96,6 +100,24 @@ return {
 
           vim.api.nvim_command(gp.config.cmd_prefix .. 'ChatToggle')
         end,
+      },
+
+      agents = {
+        {
+          name = 'ChatGPT4o',
+          chat = true,
+          command = false,
+          model = { model = 'gpt-4o', temperature = 1.1, top_p = 1 },
+          system_prompt = require('gp.defaults').chat_system_prompt .. custom_prompt,
+        },
+        {
+          provider = 'openai',
+          name = 'ChatGPT4o-mini',
+          chat = true,
+          command = false,
+          model = { model = 'gpt-4o-mini', temperature = 1.1, top_p = 1 },
+          system_prompt = require('gp.defaults').chat_system_prompt .. custom_prompt,
+        },
       },
     }
 
