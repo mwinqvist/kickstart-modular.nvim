@@ -27,4 +27,9 @@ vim.api.nvim_create_autocmd('VimEnter', {
   end,
 })
 
+-- :G to open Neogit
+vim.api.nvim_create_user_command('G', function()
+  require('neogit').open()
+end, {})
+
 -- vim: ts=2 sts=2 sw=2 et
