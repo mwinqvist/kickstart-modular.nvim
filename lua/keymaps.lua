@@ -1,7 +1,7 @@
 -- [[ Basic Keymaps ]]
 
 -- Clear highlights on search when pressing 'q' in normal mode
-vim.keymap.set('n', 'q', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -10,6 +10,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 -- Use 'kj' instead of Escape key
 vim.keymap.set({ 'v', 'i' }, 'kj', '<Esc>')
 vim.keymap.set('c', 'kj', '<C-c>')
@@ -22,32 +23,35 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<C-q>', '<C-w><C-q>', { desc = 'Close current window' })
 
--- Use Tab and S-Tab to indent/outdent
--- Remapping Tab also remaps 'i'...
 local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<Tab>', '>>', opts)
-vim.keymap.set('n', '<S-Tab>', '<<', opts)
-vim.keymap.set('v', '<Tab>', '>gv', opts)
-vim.keymap.set('v', '<S-Tab>', '<gv', opts)
 
--- Use <C-p> and <C-n> to jump to previous/next location
-vim.keymap.set('n', '<C-p>', '<C-o>', opts)
-vim.keymap.set('n', '<C-n>', '<C-i>', opts)
+-- Tabs
+vim.api.nvim_set_keymap('n', '<Tab>', ':tabnext<CR>', opts)
+vim.api.nvim_set_keymap('n', '<S-Tab>', ':tabprevious<CR>', opts)
 
--- Use 'H', 'L' to move to start/end of line
+-- Visual indent
+vim.keymap.set('v', '<', '>gv', opts)
+vim.keymap.set('v', '>', '<gv', opts)
+
+-- 'H', 'L' to move to start/end of line
 vim.keymap.set({ 'n', 'v', 'o' }, 'H', '^', opts)
 vim.keymap.set({ 'n', 'v', 'o' }, 'L', '$', opts)
 
--- Use 'J','K' to move down/up
+-- 'J','K' to move down/up
 vim.keymap.set('n', 'J', '}', opts)
 vim.keymap.set('n', 'K', '{', opts)
 
--- Use 'ä' to create marks
+-- Jump to previous/next occurence of word under cursor
+vim.api.nvim_set_keymap('n', '[o', '#', opts)
+vim.api.nvim_set_keymap('n', ']o', '*', opts)
+
+-- 'ä' to create marks
 -- 'm' is used for cut in cutlass.nvim
 vim.keymap.set('n', 'ä', 'm', opts)
 
--- Use 'U' to redo
+-- 'U' to redo
 vim.keymap.set('n', 'U', '<C-r>', opts)
 
 -- vim: ts=2 sts=2 sw=2 et

@@ -72,6 +72,23 @@ return {
       -- - gcc  - Toggle comment on current line
       require('mini.comment').setup()
 
+      require('mini.bracketed').setup {
+        comment = { suffix = 'c', options = {} },
+        conflict = { suffix = 'x', options = {} },
+        diagnostic = { suffix = 'd', options = {} },
+        indent = { suffix = 'i', options = {} },
+        quickfix = { suffix = 'q', options = {} },
+        treesitter = { suffix = 't', options = {} },
+        -- Unused
+        buffer = { suffix = '', options = {} },
+        file = { suffix = '', options = {} },
+        jump = { suffix = '', options = {} },
+        location = { suffix = '', options = {} },
+        oldfile = { suffix = '', options = {} },
+        undo = { suffix = '', options = {} },
+        window = { suffix = '', options = {} },
+        yank = { suffix = '', options = {} },
+      }
       require('mini.files').setup {
         windows = {
           preview = true,
