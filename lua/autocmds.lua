@@ -32,4 +32,7 @@ vim.api.nvim_create_user_command('G', function()
   require('neogit').open()
 end, {})
 
+-- Show line diagnostics automatically in hover window
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
 -- vim: ts=2 sts=2 sw=2 et

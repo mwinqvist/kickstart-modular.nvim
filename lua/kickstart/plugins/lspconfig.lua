@@ -166,6 +166,7 @@ return {
         -- clangd = {},
         -- gopls = {},
         pyright = {},
+        bashls = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -209,6 +210,7 @@ return {
         'isort',
         'markdownlint',
         'rustfmt',
+        'shellcheck',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
