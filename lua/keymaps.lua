@@ -40,8 +40,8 @@ vim.keymap.set('c', 'kj', '<C-c>')
 local opts = { noremap = true, silent = true }
 
 -- Tabs
-vim.api.nvim_set_keymap('n', '<Tab>', ':tabnext<CR>', opts)
-vim.api.nvim_set_keymap('n', '<S-Tab>', ':tabprevious<CR>', opts)
+-- vim.api.nvim_set_keymap('n', '<Tab>', ':tabnext<CR>', opts)
+-- vim.api.nvim_set_keymap('n', '<S-Tab>', ':tabprevious<CR>', opts)
 
 -- Visual indent
 vim.keymap.set('v', '<', '>gv', opts)
