@@ -56,8 +56,8 @@ vim.keymap.set('n', 'J', '}', opts)
 vim.keymap.set('n', 'K', '{', opts)
 
 -- Jump to previous/next occurence of word under cursor
-vim.api.nvim_set_keymap('n', '[o', '#', opts)
-vim.api.nvim_set_keymap('n', ']o', '*', opts)
+vim.api.nvim_set_keymap('n', '[w', '#', opts)
+vim.api.nvim_set_keymap('n', ']w', '*', opts)
 
 -- 'ä' to create marks
 -- 'm' is used for cut in cutlass.nvim

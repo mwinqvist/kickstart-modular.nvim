@@ -259,6 +259,7 @@ return {
         'rustfmt',
         'shellcheck',
         'prettier',
+        'eslint',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

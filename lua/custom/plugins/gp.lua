@@ -101,24 +101,6 @@ return {
           vim.api.nvim_command(gp.config.cmd_prefix .. 'ChatToggle')
         end,
       },
-
-      agents = {
-        {
-          name = 'ChatGPT4o',
-          chat = true,
-          command = false,
-          model = { model = 'gpt-4o', temperature = 1.1, top_p = 1 },
-          system_prompt = require('gp.defaults').chat_system_prompt .. custom_prompt,
-        },
-        {
-          provider = 'openai',
-          name = 'ChatGPT4o-mini',
-          chat = true,
-          command = false,
-          model = { model = 'gpt-4o-mini', temperature = 1.1, top_p = 1 },
-          system_prompt = require('gp.defaults').chat_system_prompt .. custom_prompt,
-        },
-      },
     }
 
     require('gp').setup(conf)
